@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+<TabPane fx:id="detailsTabPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tour_planner_lamthi_kiri_puka.controller.TabsPaneController">
+    <tabs>
+        <Tab fx:id="generalTab"  text="General">
+            <content>
+                <fx:include source="GeneralTab.fxml" />
+            </content>
+        </Tab>
+        <Tab text="Route">
+            <!-- Content for the Route tab -->
+        </Tab>
+        <Tab text="Misc">
+            <!-- Content for the Misc tab -->
+        </Tab>
+    </tabs>
+</TabPane>

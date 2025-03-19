@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+
+<VBox spacing="10" alignment="TOP_CENTER" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tour_planner_lamthi_kiri_puka.controller.NewTourFormController">
+    <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+    <TextField fx:id="nameField" promptText="Tour Name"/>
+    <TextField fx:id="descriptionField" promptText="Description"/>
+    <TextField fx:id="fromField" promptText="From"/>
+    <TextField fx:id="toField" promptText="To"/>
+    <TextField fx:id="transportTypeField" promptText="Transport Type"/>
+    <Button fx:id="uploadImageButton" text="Upload Image" onAction="#handleImageSelection"/>
+    <HBox spacing="10">
+        <Button text="Save" onAction="#handleSave"/>
+        <Button text="Cancel" onAction="#handleCancel"/>
+    </HBox>
+</VBox>

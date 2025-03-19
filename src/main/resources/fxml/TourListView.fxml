@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="tour_planner_lamthi_kiri_puka.controller.TourListViewController">
+    <Button text="Add Tour" onAction="#handleAddTour" fx:id="addTourButton" />
+    <ListView fx:id="tourListView" VBox.vgrow="ALWAYS"/>
+</VBox>
