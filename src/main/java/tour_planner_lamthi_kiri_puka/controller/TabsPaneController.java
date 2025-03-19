@@ -1,6 +1,6 @@
 package tour_planner_lamthi_kiri_puka.controller;
 
-import com.tourplannerapp.model.TourViewModel;
+import tour_planner_lamthi_kiri_puka.model.TourViewModel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
