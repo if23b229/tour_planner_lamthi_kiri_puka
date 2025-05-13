@@ -1,3 +1,5 @@
+package tour_planner_lamthi_kiri_puka.controller;
+
 import javafx.scene.control.TabPane;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

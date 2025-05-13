@@ -22,7 +22,7 @@ public class MapSectionController {
     public void updateMapImage(String imagePath) {
         if (imagePath != null && !imagePath.trim().isEmpty()) {
             Image image = new Image(imagePath);
-            mapImageView.setImage(image);
+            mapImageView.setImage(image);//data binding
         } else {
             mapImageView.setImage(null); // Add your default image or clear it.
         }

@@ -1,3 +1,5 @@
+package tour_planner_lamthi_kiri_puka.controller;
+
 import tour_planner_lamthi_kiri_puka.model.TourViewModel;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
