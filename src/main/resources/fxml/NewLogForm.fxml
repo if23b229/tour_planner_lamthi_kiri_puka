@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+
+<GridPane xmlns:fx="http://javafx.com/fxml" fx:controller="tour_planner_lamthi_kiri_puka.controller.NewLogFormController">
+        <DatePicker fx:id="logDatePicker" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+        <TextArea fx:id="commentField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+        <TextField fx:id="difficultyField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+        <TextField fx:id="totalDistanceField" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+        <TextField fx:id="totalTimeField" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+        <TextField fx:id="ratingField" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+        <TextField fx:id="logDetailsField" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+        <Button text="Save" onAction="#handleSave" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+        <Button text="Cancel" onAction="#handleCancel" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+</GridPane>

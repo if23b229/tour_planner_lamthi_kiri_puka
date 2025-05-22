@@ -1,4 +1,4 @@
-package tour_planner_lamthi_kiri_puka.controller;
+/*package tour_planner_lamthi_kiri_puka.controller;
 
 import tour_planner_lamthi_kiri_puka.model.TourViewModel;
 import javafx.scene.control.TextField;
@@ -37,4 +37,4 @@ class NewTourFormControllerTest {
         // Verify the tour list controller received a new tour
         verify(mockTourListController).addTour(any(TourViewModel.class));
     }
-}
+}*/

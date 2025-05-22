@@ -2,17 +2,29 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.*?>
+<?import javafx.scene.image.ImageView?>
+<?import tour_planner_lamthi_kiri_puka.controller.AutoCompleteTextField?>
 
-<VBox spacing="10" alignment="TOP_CENTER" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tour_planner_lamthi_kiri_puka.controller.NewTourFormController">
-    <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
-    <TextField fx:id="nameField" promptText="Tour Name"/>
-    <TextField fx:id="descriptionField" promptText="Description"/>
-    <TextField fx:id="fromField" promptText="From"/>
-    <TextField fx:id="toField" promptText="To"/>
-    <TextField fx:id="transportTypeField" promptText="Transport Type"/>
-    <Button fx:id="uploadImageButton" text="Upload Image" onAction="#handleImageSelection"/>
-    <HBox spacing="10">
-        <Button text="Save" onAction="#handleSave"/>
-        <Button text="Cancel" onAction="#handleCancel"/>
-    </HBox>
-</VBox>
+<ScrollPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fitToWidth="true" fitToHeight="true" fx:controller="tour_planner_lamthi_kiri_puka.controller.NewTourFormController">
+    <VBox spacing="10" alignment="TOP_CENTER">
+        <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+        <TextField fx:id="nameField" promptText="Tour Name" prefWidth="300.0"/>
+        <TextField fx:id="descriptionField" promptText="Description" prefWidth="300.0"/>
+        <AutoCompleteTextField fx:id="fromField" promptText="From" prefWidth="300.0"/>
+        <AutoCompleteTextField fx:id="toField" promptText="To" prefWidth="300.0"/>
+        <ComboBox fx:id="transportTypeField" promptText="Transport Type" prefWidth="300.0"/>
+        <Button fx:id="uploadImageButton" text="Upload Image" onAction="#handleImageSelection"/>
+        <HBox spacing="10">
+            <Button text="Save" onAction="#handleSave"/>
+            <Button text="Cancel" onAction="#handleCancel"/>
+        </HBox>
+        <AnchorPane fx:id="imagePreviewPane" minWidth="300" minHeight="200">
+            <ImageView fx:id="imagePreview" preserveRatio="true">
+                <AnchorPane.leftAnchor>0.0</AnchorPane.leftAnchor>
+                <AnchorPane.rightAnchor>0.0</AnchorPane.rightAnchor>
+                <AnchorPane.topAnchor>0.0</AnchorPane.topAnchor>
+                <AnchorPane.bottomAnchor>0.0</AnchorPane.bottomAnchor>
+            </ImageView>
+        </AnchorPane>
+    </VBox>
+</ScrollPane>

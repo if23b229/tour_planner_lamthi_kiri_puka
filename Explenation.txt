@@ -1,0 +1,86 @@
+ToDO: Instead of having a list that adds all the attributes as different models -> implement a model that has the same tour idea model? So that the items on this list are easier to be listed bzw. edited 
+
+
+SOLID - take into account the S important for the test
+
+
+
+->JavaFX entry point - TourPlannerApplication
+start() - loads the MAINVIEW.fxml file and set up the main scene and stage
+When main() - is called, launch(args) triggers the JavaFX runtime, which eventually calls start().
+
+->MainViewController is tied to MainView.fxml.
+It contains a BorderPane (mainBorderPane) with a SplitPane (mainSplitPane) dividing the UI into (typically) a left area (the tour list) and a right area (the details/tabs).
+Sets up references between controllers (e.g., passes tourListController to detailsController, sets the GeneralTabController inside tourListController, etc.).
+Adjusts the SplitPane divider position so the list is about 30% of the width, and the details area is 70%.
+
+->TourListViewController - Manages the list of tours (ListView<TourViewModel> tourListView).
+On selecting a tour from the list, showTourDetails(newValue) is called, which updates the GeneralTab area to show that tour’s info.
+
+->TabsPaneController - Manages the tab pane (right side).
+The main TabPane (detailsTabPane). A default generalTab, which is loaded from GeneralTab.fxml.
+The loaded GeneralTabController. 
+loadGeneralTab() is called in initialize() to load the FXML for the general tab.
+
+->GeneralTabController - Controls the main “General” tab that displays the currently selected tour’s details (labels for name, description, etc.).
+Edit: Opens the edit tab via detailsController.openEditTourTab(selectedTour).
+Delete: Confirms deletion, then calls tourListController.deleteTour(...).
+enableButtons() / disableButtons() toggle the Edit/Delete buttons based on whether a tour is selected.
+
+->NewTourFormController - Responsible for creating or editing a tour.
+Has TextFields for name, description, from, to, transport type, plus an image file path.
+handleSave() either updates an existing TourViewModel (if selectedTour != null) or creates a new one and adds it to the tourListController.
+
+->MapSectionCOntroller - Manages an ImageView inside an AnchorPane for displaying a map (or any image).
+Has a method updateMapImage(...) that sets the ImageView’s image based on a provided file path/string.
+
+->TourViewModel - A JavaFX ViewModel class with StringProperty fields (name, description, from, to, transportType, imagePath).
+Provides getters, setters, and StringProperty accessors, enabling JavaFX binding between UI controls and these properties. The toString() method is overridden so each TourViewModel can display a meaningful label in the ListView.
+
+
+
+
+
+----------------------------
+A REST API (Representational State Transfer Application Programming Interface) is a type of API that uses the principles of REST to allow applications to communicate with each other over the internet. It's a set of rules and guidelines that dictate how a web API should be structured and how it should handle requests and responses.
+
+
+
+
+„define your own reusable UI-component“ - AUTOCOMPLETEREXTFIELD.JAVA
+
+Eigenes UI-Element
+
+Deine AutoCompleteTextField erbt von javafx.scene.control.TextField und erweitert es um eine Autocomplete-Funktion.
+
+Du kapselst all das Verhalten (REST-Abfrage, Popup-Logik, Auswahlübernahme) in genau dieser einen wiederverwendbaren Klasse.
+
+Kapselung der Logik
+
+Statt in jedem Controller Code für Autovervollständigung zu duplizieren, braucht jeder nur noch eine Instanz deiner Komponente in sein FXML bzw. Java-Code einzufügen.
+
+Du bindest das OpenRouteService-Interface über setOpenRouteService(...) ein – damit bleibt die Komponente entkoppelt von konkreten Implementierungen.
+
+Saubere Trennung
+
+Die Komponente kümmert sich allein um UI-Aspekte und das Aufbereiten/Anzeigen der Vorschläge.
+
+Die REST-Logik selbst (HTTP-Request, JSON-Parsing) bleibt in deiner Service-Klasse OpenRouteService. Damit hast du eine klare Layer-Trennung zwischen UI-Layer und Business-Logic.
+
+Wiederverwendbarkeit
+
+Du könntest dieses Textfeld künftig überall nehmen — nicht nur für „Von“ und „Nach“, sondern auch für jede andere Adresseingabe.
+
+Du hast damit ein Modul geschaffen, das in Projekten oder anderen Formularen erneut genutzt werden kann.
+
+
+
+
+
+
+
+wtf is Jakarta persistence as an import
+
+athere next step: me gjet dan markimet me te kuqe qe jan ne folderin e projektit aktual edhe me gjet se ca mungon duke e krahasu me projektin tjetër,,, me search global view
+
+

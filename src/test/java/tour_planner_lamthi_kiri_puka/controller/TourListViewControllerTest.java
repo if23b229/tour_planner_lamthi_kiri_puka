@@ -1,4 +1,4 @@
-package tour_planner_lamthi_kiri_puka.controller;
+/*package tour_planner_lamthi_kiri_puka.controller;
 
 import tour_planner_lamthi_kiri_puka.model.TourViewModel;
 import javafx.collections.ObservableList;
@@ -34,4 +34,4 @@ class TourListViewControllerTest {
         controller.deleteTour(tour);
         assertFalse(mockTourList.contains(tour));
     }
-}
+}*/

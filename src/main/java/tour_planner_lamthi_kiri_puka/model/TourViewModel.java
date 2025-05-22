@@ -1,28 +1,28 @@
 package tour_planner_lamthi_kiri_puka.model;
 
+
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class TourViewModel {
     private final StringProperty name = new SimpleStringProperty(this, "name", "");
     private final StringProperty description = new SimpleStringProperty(this, "description", "");
-    private final StringProperty from = new SimpleStringProperty(this, "from", "");
-    private final StringProperty to = new SimpleStringProperty(this, "to", "");
-    private final StringProperty transportType = new SimpleStringProperty(this, "transportType", ""); // Added property for transport type
+    private final StringProperty origin = new SimpleStringProperty(this, "origin", "");
+    private final StringProperty destination = new SimpleStringProperty(this, "destination", "");
+    private final StringProperty transportType = new SimpleStringProperty(this, "transportType", "");
+    private final StringProperty imagePath = new SimpleStringProperty(this, "imagePath", "");
+    private Long id;
 
-    private StringProperty imagePath;
-    // Constructors
-
-    public TourViewModel(String name, String description, String from, String to, String transportType, String imagePath) {
+    public TourViewModel(String name, String description, String origin, String destination, String transportType, String imagePath) {
         this.name.set(name);
         this.description.set(description);
-        this.from.set(from);
-        this.to.set(to);
+        this.origin.set(origin);
+        this.destination.set(destination);
         this.transportType.set(transportType);
-        this.imagePath = new SimpleStringProperty(imagePath);
+        this.imagePath.set(imagePath);
     }
 
-    // Name property
     public String getName() {
         return name.get();
     }
@@ -35,7 +35,6 @@ public class TourViewModel {
         return name;
     }
 
-    // Description property
     public String getDescription() {
         return description.get();
     }
@@ -48,33 +47,30 @@ public class TourViewModel {
         return description;
     }
 
-    // From property
-    public String getFrom() {
-        return from.get();
+    public String getOrigin() {
+        return origin.get();
     }
 
-    public void setFrom(String value) {
-        from.set(value);
+    public void setOrigin(String value) {
+        origin.set(value);
     }
 
-    public StringProperty fromProperty() {
-        return from;
+    public StringProperty originProperty() {
+        return origin;
     }
 
-    // To property
-    public String getTo() {
-        return to.get();
+    public String getDestination() {
+        return destination.get();
     }
 
-    public void setTo(String value) {
-        to.set(value);
+    public void setDestination(String value) {
+        destination.set(value);
     }
 
-    public StringProperty toProperty() {
-        return to;
+    public StringProperty destinationProperty() {
+        return destination;
     }
 
-    // TransportType property
     public String getTransportType() {
         return transportType.get();
     }
@@ -85,11 +81,6 @@ public class TourViewModel {
 
     public StringProperty transportTypeProperty() {
         return transportType;
-    }
-
-    public TourViewModel() {
-        // Initialize imagePath along with other properties
-        this.imagePath = new SimpleStringProperty();
     }
 
     public String getImagePath() {
@@ -104,10 +95,20 @@ public class TourViewModel {
         return imagePath;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     @Override
     public String toString() {
-        return name.get() + ":  " + from.get()+ " - " + to.get();
+        return name.get() + ": " + origin.get() + " - " + destination.get();
     }
 
+    public Tour toTour() {
+        return new Tour(name.get(), description.get(), origin.get(), destination.get(), transportType.get(), imagePath.get());
+    }
 }

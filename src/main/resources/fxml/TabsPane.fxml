@@ -1,18 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tab?>
 <?import javafx.scene.layout.VBox?>
-<TabPane fx:id="detailsTabPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tour_planner_lamthi_kiri_puka.controller.TabsPaneController">
-    <tabs>
-        <Tab fx:id="generalTab"  text="General">
-            <content>
-                <fx:include source="GeneralTab.fxml" />
-            </content>
-        </Tab>
-        <Tab text="Route">
-            <!-- Content for the Route tab -->
-        </Tab>
-        <Tab text="Misc">
-            <!-- Content for the Misc tab -->
-        </Tab>
-    </tabs>
-</TabPane>
+
+<?import javafx.scene.control.Label?>
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tour_planner_lamthi_kiri_puka.controller.TabsPaneController" spacing="5" fillWidth="true">
+    <children>
+        <TabPane fx:id="detailsTabPane" VBox.vgrow="ALWAYS">
+            <tabs>
+                <Tab fx:id="generalTab" text="General">
+                    <content>
+                        <ScrollPane fitToWidth="true" fitToHeight="true">
+                            <content>
+                                <fx:include source="GeneralTab.fxml" />
+                            </content>
+                        </ScrollPane>
+                    </content>
+                </Tab>
+                <Tab fx:id="routeTab" text="Route">
+                    <content>
+                        <ScrollPane fitToWidth="true" fitToHeight="true">
+                            <content>
+                                <fx:include source="RouteTab.fxml" />
+                            </content>
+                        </ScrollPane>
+                    </content>
+                </Tab>
+                <Tab fx:id="logsTab" text="Logs">
+                    <content>
+                    <ScrollPane fitToWidth="true" fitToHeight="true">
+                        <content>
+                            <fx:include source="TourLogsTab.fxml" />
+                        </content>
+                    </ScrollPane>
+                </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </children>
+</VBox>

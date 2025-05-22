@@ -1,7 +1,7 @@
 //Die Klasse OpenRouteService muss erstellt und programmiert werden
 package tour_planner_lamthi_kiri_puka.controller;
 
-import com.tourplannerapp.service.OpenRouteService;//com muss gelöscht werden
+import tour_planner_lamthi_kiri_puka.service.OpenRouteService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Point2D;
