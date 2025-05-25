@@ -63,6 +63,10 @@ public class TabsPaneController {
             Node generalTabContent = loader.load();
             generalTabController = loader.getController();
             generalTab.setContent(generalTabContent);
+            //generalTabController = loader.getController();
+            generalTabController.setDetailsController(this);// ── inject the parent TabsPaneController so it can open edit/log tabs
+            generalTabController.setTourListController(tourListController); // ── inject the TourListViewController so it knows which tour is selected:
+            
         } catch (IOException e) {
             e.printStackTrace(); // Replace with proper logging
         }
@@ -73,8 +77,17 @@ public class TabsPaneController {
             FXMLLoader loader = springFxmlLoader.load("/fxml/NewTourForm.fxml"); // Use the instance method
             //FXMLLoader loader = FXMLLoader.load(getClass(). getClassLoader(). getResource("fxml/NewTourForm.fxml"));
             Tab newTab = new Tab("New Tour", loader.load());
-            NewTourFormController newTourFormController = loader.getController();
-            newTourFormController.setTabsPaneController(this);
+
+            NewTourFormController ctr = loader.getController();
+            // ← Inject your TabPane so closeCurrentTab() has a non-null reference:
+            ctr.setTabPane(detailsTabPane);
+            // ← Inject your TabsPaneController so Save/Cancel callbacks work:
+            ctr.setTabsPaneController(this);
+            // ← Inject the TourListViewController so Save() can add/update tours:
+            ctr.setTourListController(tourListController);
+            
+            //NewTourFormController newTourFormController = loader.getController();
+            //newTourFormController.setTabsPaneController(this);
             detailsTabPane.getTabs().add(newTab);
             detailsTabPane.getSelectionModel().select(newTab);
         } catch (IOException e) {
@@ -86,9 +99,16 @@ public class TabsPaneController {
         try {
             FXMLLoader loader = springFxmlLoader.load("/fxml/NewTourForm.fxml"); // Use the instance method
             Tab editTab = new Tab("Edit Tour", loader.load());
-            NewTourFormController editTourFormController = loader.getController();
-            editTourFormController.setTourDataForEdit(tour);
-            editTourFormController.setTabsPaneController(this);
+
+            NewTourFormController ctr = loader.getController();
+            ctr.setTourDataForEdit(tour);
+            ctr.setTabPane(detailsTabPane);
+            ctr.setTabsPaneController(this);
+            ctr.setTourListController(tourListController);
+
+            //NewTourFormController editTourFormController = loader.getController();
+            //editTourFormController.setTourDataForEdit(tour);
+            //editTourFormController.setTabsPaneController(this);
             detailsTabPane.getTabs().add(editTab);
             detailsTabPane.getSelectionModel().select(editTab);
         } catch (IOException e) {

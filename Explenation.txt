@@ -84,3 +84,75 @@ wtf is Jakarta persistence as an import
 athere next step: me gjet dan markimet me te kuqe qe jan ne folderin e projektit aktual edhe me gjet se ca mungon duke e krahasu me projektin tjetër,,, me search global view
 
 
+
+
+
+Suggestion and Fetching Info for the from to Destination Points:
+
+Under the hood your AutoCompleteTextField and OpenRouteService work together to turn what you type into a list of place‐name suggestions:
+
+User Typing & Listener
+
+As soon as you type (and move focus away and back so that userInput is true), the textProperty().addListener(...) fires on each keystroke once you’ve entered at least two characters.
+
+That listener calls fetchSuggestions(newText).
+
+Fetching Suggestions
+
+List<String> results = openRouteService.getSuggestions(query);
+In your OpenRouteService, getSuggestions(...) builds a URL like
+
+https://api.openrouteservice.org/geocode/search
+  ?api_key=YOUR_KEY
+  &text=Berlin%20Central
+It then uses Spring’s RestTemplate.getForObject(...) to make an HTTP GET.
+
+The JSON that comes back looks roughly like:
+
+
+{
+  "features": [
+    {
+      "properties": { "label": "Berlin Central Station, Berlin, Germany" },
+      … 
+    },
+    { "properties": { "label": "Berlin Cathedral, Berlin, Germany" }, … },
+    …
+  ]
+}
+getSuggestions pulls out each properties.label into a plain List<String>.
+
+Updating the UI
+
+suggestions.setAll(results);
+Your ObservableList<String> suggestions backs a JavaFX ListView<String>.
+
+If the list is non-empty, you clear the old popup, wrap that ListView in a VBox, and call
+
+suggestionPopup.show(this, x, y);
+right below the text field.
+
+Selecting a Suggestion
+
+When you click an entry in the popup’s list, its setOnMouseClicked(...) handler copies that string back into the text field and hides the popup.
+
+
+So AutoComplrete: 
+Is the UI side: if the result empty the pop up never shows
+
+Lösung:::::::::
+
+No—you won’t get a module‐path error if you drop module-info.java and switch your JavaFX plugin to classpath mode, nor will adding those two lines in initialize() break anything. Here’s exactly what you do:
+
+Remove module-info.java completely.
+In your pom.xml, configure the JavaFX plugin to use the classpath launcher
+
+
+
+The Search Suggestion Done
+Cancel/Save Button Done
+
+
+
+API?
+@Autowired?

@@ -183,8 +183,8 @@
                 <configuration>
                     <mainClass>tour_planner_lamthi_kiri_puka.TourPlannerApplication</mainClass>
                     <options>
-                        <option>--add-modules</option>
-                        <option>javafx.controls,javafx.fxml,javafx.web</option>
+                        <option>--add-modules=javafx.controls,javafx.fxml,javafx.web</option>
+                        <!--<option>javafx.controls,javafx.fxml,javafx.web</option> try nr1 -->
                     </options>
                 </configuration>
             </plugin>

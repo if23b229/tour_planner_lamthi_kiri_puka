@@ -11,11 +11,35 @@ import org.springframework.stereotype.Service;//Yeah @Service
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.web.client.RestTemplate;
+import java.util.Locale;//so that the data can be fetched to e edit a log ( , ; . )
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+
+/*@Service
+public class OpenRouteService {
+    private static final String API_KEY = "";
+    private final String BASE_URL = "https://api.openrouteservice.org/v2/directions/driving-car";
+    private final String GEOCODE_URL = "https://api.openrouteservice.org/geocode/search";
+
+    private static final Logger logger = LogManager.getLogger(OpenRouteService.class);
+
+    public JsonNode getRoute(double startLat, double startLng, double endLat, double endLng) throws IOException {
+        String url = String.format("%s?api_key=%s&start=%f,%f&end=%f,%f", BASE_URL, API_KEY, startLng, startLat, endLng, endLat);
+        logger.info("Requesting route with URL: " + url);
+
+        try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
+            HttpGet request = new HttpGet(url);
+            try (CloseableHttpResponse response = httpClient.execute(request)) {
+                String jsonResponse = EntityUtils.toString(response.getEntity());
+                ObjectMapper mapper = new ObjectMapper();
+                return mapper.readTree(jsonResponse);
+            }
+        }
+    }*/
 
 @Service
 public class OpenRouteService {
@@ -26,9 +50,17 @@ public class OpenRouteService {
     private static final Logger logger = LogManager.getLogger(OpenRouteService.class);
 
     public JsonNode getRoute(double startLat, double startLng, double endLat, double endLng) throws IOException {
-        String url = String.format("%s?api_key=%s&start=%f,%f&end=%f,%f", BASE_URL, API_KEY, startLng, startLat, endLng, endLat);
-        logger.info("Requesting route with URL: " + url);
 
+        String start = String.format(Locale.US, "%f,%f", startLng, startLat);   // e.g. "13.407032,52.524932"
+        String end   = String.format(Locale.US, "%f,%f", endLng,   endLat);     // e.g. "16.348388,48.198674"
+
+
+        String url = String.format(Locale.US,
+            "%s?api_key=%s&start=%s&end=%s",
+            BASE_URL, API_KEY, start, end
+        );
+        
+        logger.info("Requesting route with URL: " + url);
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
             HttpGet request = new HttpGet(url);
             try (CloseableHttpResponse response = httpClient.execute(request)) {

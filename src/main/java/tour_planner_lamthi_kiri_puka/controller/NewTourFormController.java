@@ -12,12 +12,15 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Scope;
 
 import java.io.File;
 import java.io.IOException;
 
-@Component
+@Component//@Component tells Spring “manage this as a bean.”
+@Scope("prototype")//@Scope("prototype") tells Spring “don’t reuse the same instance—give me a new one on each lookup.”
 public class NewTourFormController {
 
     @FXML
@@ -42,7 +45,7 @@ public class NewTourFormController {
     private TourListViewController tourListController;
     private TabsPaneController tabsPaneController;
     private TourViewModel selectedTour;
-    private OpenRouteService openRouteService;
+    @Autowired private OpenRouteService openRouteService;
     private TourService tourService;
 
     private static final Logger logger = LogManager.getLogger(NewTourFormController.class);
@@ -51,12 +54,14 @@ public class NewTourFormController {
     public NewTourFormController() {}
 
     // Setter for OpenRouteService
+
     public void setOpenRouteService(OpenRouteService openRouteService) {
         this.openRouteService = openRouteService;
         initializeAutoCompleteFields();
     }
 
     // Setter for TourService
+
     public void setTourService(TourService tourService) {
         this.tourService = tourService;
     }
@@ -66,6 +71,9 @@ public class NewTourFormController {
         imagePreview.fitWidthProperty().bind(imagePreviewPane.widthProperty());
         imagePreview.fitHeightProperty().bind(imagePreviewPane.heightProperty());
         initializeTransportTypeField(); // Initialize transport type ComboBox
+
+        fromField.setOpenRouteService(openRouteService);
+        toField.setOpenRouteService(openRouteService);
     }
 
     private void initializeAutoCompleteFields() {
@@ -224,10 +232,50 @@ public class NewTourFormController {
         fromField.setText(tour.getOrigin());
         toField.setText(tour.getDestination());
         transportTypeField.setValue(tour.getTransportType());
-        imageFilePath = tour.getImagePath();
+
+        /*imageFilePath = tour.getImagePath();
         if (imageFilePath != null) {
             Image image = new Image(imageFilePath);
             imagePreview.setImage(image);
+        }/String rawPath = tour.getImagePath(); 
+    if (rawPath != null && !rawPath.isBlank()) {
+        // normalize to a file:// URI if it isn’t already
+        String uri = rawPath.startsWith("file:")
+                   ? rawPath
+                   : new File(rawPath).toURI().toString();
+        try {
+            Image img = new Image(uri);
+            imagePreview.setImage(img);
+            imageFilePath = uri;
+        } catch (Exception ex) {
+            logger.warn("Could not load image from " + uri, ex);
+            imagePreview.setImage(null);
+            imageFilePath = null;
+        }
+    } else {
+        // no image at all — clear the preview
+        imagePreview.setImage(null);
+        imageFilePath = null;
+    }*/
+        String rawPath = tour.getImagePath(); 
+        if (rawPath != null && !rawPath.isBlank()) {
+            // normalize to a file:// URI if it isn’t already
+            String uri = rawPath.startsWith("file:")
+                    ? rawPath
+                    : new File(rawPath).toURI().toString();
+            try {
+                Image img = new Image(uri);
+                imagePreview.setImage(img);
+                imageFilePath = uri;
+            } catch (Exception ex) {
+                logger.warn("Could not load image from " + uri, ex);
+                imagePreview.setImage(null);
+                imageFilePath = null;
+            }
+        } else {
+            // no image at all — clear the preview
+            imagePreview.setImage(null);
+            imageFilePath = null;
         }
     }
 
