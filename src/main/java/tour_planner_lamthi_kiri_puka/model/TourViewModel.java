@@ -14,6 +14,8 @@ public class TourViewModel {
     private final StringProperty imagePath = new SimpleStringProperty(this, "imagePath", "");
     private Long id;
 
+     public TourViewModel() { }
+
     public TourViewModel(String name, String description, String origin, String destination, String transportType, String imagePath) {
         this.name.set(name);
         this.description.set(description);

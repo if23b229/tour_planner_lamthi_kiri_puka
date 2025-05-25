@@ -1,37 +1,70 @@
-/*package tour_planner_lamthi_kiri_puka.controller;
+/*
+package tour_planner_lamthi_kiri_puka.controller;
 
-import tour_planner_lamthi_kiri_puka.model.TourViewModel;
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.mockito.Mockito.*;
+import tour_planner_lamthi_kiri_puka.model.TourViewModel;
 
-class GeneralTabControllerTest {
-
+public class GeneralTabControllerTest {
     private GeneralTabController controller;
-    private TourViewModel mockTour;
+    private DummyTabsPaneController dummyDetails;
+
+    static class DummyTabsPaneController extends TabsPaneController {
+        boolean editCalled = false;
+        boolean logCalled = false;
+        TourViewModel editParam;
+        TourViewModel logParam;
+
+        @Override
+        public void openEditTourTab(TourViewModel tour) {
+            this.editCalled = true;
+            this.editParam = tour;
+        }
+
+        @Override
+        public void openNewLogTab(TourViewModel tour) {
+            this.logCalled = true;
+            this.logParam = tour;
+        }
+    }
 
     @BeforeEach
-    void setUp() {
-        // Mock the necessary dependencies or objects
-        mockTour = mock(TourViewModel.class);
+    public void setUp() {
         controller = new GeneralTabController();
-
-        // Setup necessary initial state or interactions before each test
-        // Assume that controller is properly initialized with FXML dependencies if needed
+        dummyDetails = new DummyTabsPaneController();
+        controller.setDetailsController(dummyDetails);
     }
 
     @Test
-    void testDisplayTourDetails() {
-        // Setup the tour details
-        when(mockTour.getName()).thenReturn("Sample Tour");
-        when(mockTour.getDescription()).thenReturn("A sample description");
-
-        // Call the method to test
-        controller.displayTourDetails(mockTour);
-
-        // Verify the display method behaves as expected.
-        // Assertions should check the actual labels in the controller,
-        // which requires controller fields to be accessible for the test.
-        // Here we'd need to mock JavaFX components and run in a JavaFX thread.
+    public void testHandleEditCallsOpenEditTourTab() {
+        TourViewModel tvm = new TourViewModel();
+        controller.setSelectedTour(tvm);
+        invokeHandle("handleEdit");
+        assertTrue(dummyDetails.editCalled);
+        assertSame(tvm, dummyDetails.editParam);
     }
-}*/
+
+    @Test
+    public void testHandleAddLogCallsOpenNewLogTab() {
+        TourViewModel tvm = new TourViewModel();
+        controller.setSelectedTour(tvm);
+        invokeHandle("handleAddLog");
+        assertTrue(dummyDetails.logCalled);
+        assertSame(tvm, dummyDetails.logParam);
+    }
+
+
+    // helper to invoke private methods
+    private void invokeHandle(String methodName) {
+        try {
+            var m = GeneralTabController.class.getDeclaredMethod(methodName);
+            m.setAccessible(true);
+            m.invoke(controller);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+}
+*/
