@@ -73,7 +73,7 @@ public class GeneralTabController {
         this.selectedTour = selectedTour;
         if (selectedTour != null && selectedTour.getImagePath() != null) {
             this.imageFilePath = selectedTour.getImagePath();
-            updateMapImage(selectedTour.getImagePath());
+            updateMapImage(selectedTour.getImagePath());//construct a new Image(imagePath, true) to load it asynchronously into the ImageView.
         }
     }
 

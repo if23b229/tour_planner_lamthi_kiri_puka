@@ -119,7 +119,7 @@ public class NewTourFormController {
     }
 
     @FXML
-    public void handleSave() {
+    public void handleSave() {//here is the handling of saving an image: hat method converts the file path to a file:// URI and stores it in the Tour entity’s image_path column.
         logger.info("Save button clicked");
 
         if (!validateInput()) {

@@ -156,3 +156,47 @@ Cancel/Save Button Done
 
 API?
 @Autowired?
+
+_________________________________________________
+Docker Container wont start -
+
+
+Hit ⊞ Win and type services, then open Services.
+
+In the list, look for anything like PostgreSQL (e.g. “postgresql-13” or “postgresql-x64-12”).
+
+Right-click it → Stop.
+
+Now retry docker run (or docker-compose up).
+
+_________________________________________________
+
+# 1) Get a shell inside your Postgres container
+docker exec -it tour-planner-db bash
+
+# 2) Start psql as your “nertil” user on the “tourplannerapp” DB
+psql -U nertil -d tourplannerapp
+
+# 3) List all tables
+\dt
+
+SELECT * FROM tour; \watch 2
+real time information
+
+# 4) Inspect the tours table
+SELECT * FROM tour;
+
+# 5) Inspect the tour_logs table
+SELECT * FROM tour_logs;
+
+# 6) Watch active sessions & queries
+SELECT * FROM pg_stat_activity;
+
+# 7) Re-run that last query every 2 seconds
+\watch 2
+
+# 8) When you’re done, quit psql
+\q
+
+# 9) And exit the container shell
+exit

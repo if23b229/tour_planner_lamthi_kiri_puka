@@ -43,7 +43,7 @@ public class OpenRouteService {
 
 @Service
 public class OpenRouteService {
-    private static final String API_KEY = "5b3ce3597851110001cf62486302931e26e14c5dbcbc0ac00a076c01";
+    private static final String API_KEY = "5b3ce3597851110001cf62486302931e26e14c5dbcbc0ac00a076c01";//API Key builds HTTP URLs using our api_key plus address text.
     private final String BASE_URL = "https://api.openrouteservice.org/v2/directions/driving-car";
     private final String GEOCODE_URL = "https://api.openrouteservice.org/geocode/search";
 
@@ -60,7 +60,7 @@ public class OpenRouteService {
             BASE_URL, API_KEY, start, end
         );
         
-        logger.info("Requesting route with URL: " + url);
+        logger.info("Requesting route with URL: " + url);//here 
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
             HttpGet request = new HttpGet(url);
             try (CloseableHttpResponse response = httpClient.execute(request)) {
@@ -71,6 +71,7 @@ public class OpenRouteService {
         }
     }
 
+    //GeneralTabController, RouteTabController) consume those coordinates to load images or inject routes into a WebView/Leaflet map.
     public double[] getCoordinates(String location) throws IOException {
         String url = String.format("%s?api_key=%s&text=%s", GEOCODE_URL, API_KEY, location.replace(" ", "%20"));
         logger.info("Requesting coordinates with URL: " + url);

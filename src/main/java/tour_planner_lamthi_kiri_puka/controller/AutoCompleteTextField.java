@@ -16,8 +16,9 @@ import java.util.List;
 public class AutoCompleteTextField extends TextField {
     private OpenRouteService openRouteService;
     private final ObservableList<String> suggestions = FXCollections.observableArrayList();
+    //The ListView for showing suggestions isn’t declared in any FXML — it’s created entirely in code inside your AutoCompleteTextField class:
     private final ListView<String> suggestionList = new ListView<>(suggestions);
-    private final Popup suggestionPopup = new Popup();
+    private final Popup suggestionPopup = new Popup();//and what pops up as suggestion
     private boolean userInput = false;
 
     public AutoCompleteTextField() {
@@ -55,7 +56,7 @@ public class AutoCompleteTextField extends TextField {
 
     private void fetchSuggestions(String query) {
         try {
-            List<String> results = openRouteService.getSuggestions(query);
+            List<String> results = openRouteService.getSuggestions(query);//
             suggestions.setAll(results);
             if (!suggestions.isEmpty()) {
                 suggestionPopup.getContent().clear();
@@ -75,6 +76,11 @@ public class AutoCompleteTextField extends TextField {
             showErrorPopup("Unable to fetch suggestions");
         }
     }
+    /*
+     * On each keystroke (after 2+ chars) it calls our OpenRouteService.getSuggestions(query), 
+     * which wraps the OpenRoute geocoding API.
+     * 
+    */
 
     private void showErrorPopup(String message) {
         Stage errorStage = new Stage();
